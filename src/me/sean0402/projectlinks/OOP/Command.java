@@ -10,13 +10,13 @@ import java.util.List;
 public class Command {
 
     private final String commandName;
-    private final long delay;
+    private final long cooldown;
     private final double cost;
     private final List<String> actions;
 
-    public Command(String commandName, long delay, double cost, List<String> commands) {
+    public Command(String commandName, long cooldown, double cost, List<String> commands) {
         this.commandName = commandName != null ? commandName : "Command invalid.";
-        this.delay = delay;
+        this.cooldown = cooldown;
         this.cost = cost;
         this.actions = commands != null ? commands : new ArrayList<>();
     }
@@ -25,8 +25,8 @@ public class Command {
         return commandName;
     }
 
-    public long getDelay() {
-        return delay;
+    public long getCooldown() {
+        return cooldown;
     }
 
     public double getCost() {

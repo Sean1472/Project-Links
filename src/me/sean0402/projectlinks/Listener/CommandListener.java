@@ -5,6 +5,7 @@ import me.sean0402.projectlinks.OOP.Command;
 import me.sean0402.projectlinks.ProjectLinks;
 import me.sean0402.projectlinks.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,7 +29,7 @@ public class CommandListener implements Listener {
         for (Command command : ProjectLinks.commandList) {
             if (message.equalsIgnoreCase(command.getCommandName())) {
                 e.setCancelled(true);
-                if (!manager.tryCooldown(e.getPlayer().getUniqueId(), command.getDelay())) {
+                if (!manager.tryCooldown(e.getPlayer().getUniqueId(), command.getCooldown())) {
                     e.getPlayer().sendMessage(Utils.colour(ProjectLinks.getInstance().getConfig().getString("Messages.onCooldown").replace("%remaining%", String.valueOf(manager.getTimeReamining(e.getPlayer())))));
                     return;
                 }
@@ -50,6 +51,12 @@ public class CommandListener implements Listener {
                 Bukkit.dispatchCommand(player, action);
             } else if (prefix.startsWith("[console]")) {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), action);
+            } else if (prefix.startsWith("[sound]")) {
+                try {
+                    player.playSound(player.getLocation(), Sound.valueOf(action), 1f, 1f);
+                } catch (Exception e) {
+                    Utils.sendConsoleMessage("&c" + action + " &cis not a valid sound!");
+                }
             }
         }
     }

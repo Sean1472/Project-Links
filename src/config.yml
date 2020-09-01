@@ -6,12 +6,12 @@
 Commands:
   discord:
     Cost: 100
-    Delay: 10
+    Cooldown: 10
     Actions:
       - "[sendMessage] &7Discord link: &cDISCORD.COM"
   twitter:
     Cost: 100
-    Delay: 10
+    Cooldown: 10
     Actions:
       - "[sendMessage] &7Twitter link: &cTWITTER.COM"
       - "[broadcast] &7Follow our twitter!"
