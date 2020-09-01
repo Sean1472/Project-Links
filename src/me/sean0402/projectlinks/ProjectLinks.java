@@ -1,6 +1,8 @@
 package me.sean0402.projectlinks;
 
+import me.sean0402.projectlinks.Cooldowns.CooldownManager;
 import me.sean0402.projectlinks.Listener.CommandListener;
+import me.sean0402.projectlinks.Listener.PlayerQuit;
 import me.sean0402.projectlinks.OOP.Command;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
@@ -18,13 +20,16 @@ public class ProjectLinks extends JavaPlugin {
 
     private static ProjectLinks instance;
 
+    private final CooldownManager manager = new CooldownManager();
+
     public static List<Command> commandList = new ArrayList<>();
 
     @Override
     public void onEnable() {
         instance = this;
+        saveDefaultConfig();
         loadCommands();
-        registerListeners(new CommandListener());
+        registerListeners(new CommandListener(manager), new PlayerQuit(manager));
     }
 
     @Override
