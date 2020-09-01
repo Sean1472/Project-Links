@@ -1,0 +1,16 @@
+# Project Links
+# Made by Sean0402
+
+# Commands
+
+Commands:
+  discord:
+    Cost: 100
+    Delay: 10
+    Actions:
+      - "[sendMessage] &7Discord link: &cDISCORD.COM"
+  twitter:
+    Cost: 100
+    Delay: 10
+    Actions:
+      - "[sendMessage] &7Twitter link: &cTWITTER.COM"
