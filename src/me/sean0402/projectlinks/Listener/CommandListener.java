@@ -4,6 +4,8 @@ import me.sean0402.projectlinks.Cooldowns.CooldownManager;
 import me.sean0402.projectlinks.OOP.Command;
 import me.sean0402.projectlinks.ProjectLinks;
 import me.sean0402.projectlinks.utils.Utils;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -30,8 +32,24 @@ public class CommandListener implements Listener {
                     e.getPlayer().sendMessage(Utils.colour(ProjectLinks.getInstance().getConfig().getString("Messages.onCooldown").replace("%remaining%", String.valueOf(manager.getTimeReamining(e.getPlayer())))));
                     return;
                 }
+                runActions(e.getPlayer(), command);
                 ProjectLinks.getInstance().getVault().getEcon().withdrawPlayer(e.getPlayer(), command.getCost());
                 e.getPlayer().sendMessage(Utils.colour(ProjectLinks.getInstance().getConfig().getString("Messages.takenMoney").replace("%price%", String.valueOf(command.getCost()))));
+            }
+        }
+    }
+
+    private void runActions(Player player, Command command) {
+        for (String prefix : command.getActions()) {
+            String action = prefix.substring(prefix.indexOf("]") + 1).replace("%player%", player.getName()).replace("%Player%", player.getName()).trim();
+            if (prefix.startsWith("[sendMessage]")) {
+                player.sendMessage(Utils.colour(action));
+            } else if (prefix.startsWith("[broadcast]")) {
+                Bukkit.broadcastMessage(Utils.colour(action));
+            } else if (prefix.startsWith("[player]")) {
+                Bukkit.dispatchCommand(player, action);
+            } else if (prefix.startsWith("[console]")) {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), action);
             }
         }
     }

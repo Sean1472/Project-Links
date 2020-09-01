@@ -13,6 +13,9 @@ import org.bukkit.entity.Player;
 */
 public class Utils {
 
+    public static void sendMessage(Player player, String message) {
+        player.sendMessage(colour(message));
+    }
     public static void sendHoverClickMessage(Player p, String chatMessage, String hoverMessage, String clickMessage, boolean sendTitle) {
         p.spigot().sendMessage(new ComponentBuilder(colour(chatMessage))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(colour(hoverMessage)).create()))
@@ -24,7 +27,7 @@ public class Utils {
     }
 
     public static void sendConsoleMessage(String... messages) {
-        for(String s : messages) Bukkit.getConsoleSender().sendMessage(colour(s));
+        for (String s : messages) Bukkit.getConsoleSender().sendMessage(colour(s));
     }
 
     public static void sendTitle(Player p, String title, String subTitle, int fadeIn, int stay, int fadeOut) {

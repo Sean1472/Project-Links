@@ -14,6 +14,9 @@ Commands:
     Delay: 10
     Actions:
       - "[sendMessage] &7Twitter link: &cTWITTER.COM"
+      - "[broadcast] &7Follow our twitter!"
+      - "[commandPlayer] spawn"
+      - "[console] give %player% diamond 1"
 
 Messages:
   onCooldown: "&c&l(!) &fYou are on cooldown for another &c%remaining% seconds&f."
