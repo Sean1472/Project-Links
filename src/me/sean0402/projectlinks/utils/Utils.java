@@ -3,6 +3,7 @@ package me.sean0402.projectlinks.utils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -20,6 +21,10 @@ public class Utils {
 
     public static String colour(String message) {
         return message == null ? "String is null!" : ChatColor.translateAlternateColorCodes('&', message);
+    }
+
+    public static void sendConsoleMessage(String... messages) {
+        for(String s : messages) Bukkit.getConsoleSender().sendMessage(colour(s));
     }
 
     public static void sendTitle(Player p, String title, String subTitle, int fadeIn, int stay, int fadeOut) {

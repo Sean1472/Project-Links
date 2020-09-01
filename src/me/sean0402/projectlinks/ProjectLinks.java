@@ -4,6 +4,8 @@ import me.sean0402.projectlinks.Cooldowns.CooldownManager;
 import me.sean0402.projectlinks.Listener.CommandListener;
 import me.sean0402.projectlinks.Listener.PlayerQuit;
 import me.sean0402.projectlinks.OOP.Command;
+import me.sean0402.projectlinks.Vault.Vault;
+import me.sean0402.projectlinks.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.Listener;
@@ -19,6 +21,7 @@ import java.util.List;
 public class ProjectLinks extends JavaPlugin {
 
     private static ProjectLinks instance;
+    private final Vault vault = new Vault();
 
     private final CooldownManager manager = new CooldownManager();
 
@@ -27,6 +30,10 @@ public class ProjectLinks extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        if (!vault.setupEconomy()) {
+            Utils.sendConsoleMessage("&cWARNING");
+            Utils.sendConsoleMessage("&fVault not found! Please download an economy plugin to use the cost feature!");
+        }
         saveDefaultConfig();
         loadCommands();
         registerListeners(new CommandListener(manager), new PlayerQuit(manager));
@@ -55,5 +62,9 @@ public class ProjectLinks extends JavaPlugin {
 
     public static ProjectLinks getInstance() {
         return instance;
+    }
+
+    public Vault getVault() {
+        return vault;
     }
 }

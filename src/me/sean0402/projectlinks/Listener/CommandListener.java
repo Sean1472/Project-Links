@@ -28,7 +28,10 @@ public class CommandListener implements Listener {
                 e.setCancelled(true);
                 if (!manager.tryCooldown(e.getPlayer().getUniqueId(), command.getDelay())) {
                     e.getPlayer().sendMessage(Utils.colour(ProjectLinks.getInstance().getConfig().getString("Messages.onCooldown").replace("%remaining%", String.valueOf(manager.getTimeReamining(e.getPlayer())))));
+                    return;
                 }
+                ProjectLinks.getInstance().getVault().getEcon().withdrawPlayer(e.getPlayer(), command.getCost());
+                e.getPlayer().sendMessage(Utils.colour(ProjectLinks.getInstance().getConfig().getString("Messages.takenMoney").replace("%price%", String.valueOf(command.getCost()))));
             }
         }
     }
