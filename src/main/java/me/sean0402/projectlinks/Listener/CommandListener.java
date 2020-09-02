@@ -1,7 +1,7 @@
 package me.sean0402.projectlinks.Listener;
 
 import me.sean0402.projectlinks.Cooldowns.CooldownManager;
-import me.sean0402.projectlinks.OOP.Command;
+import me.sean0402.projectlinks.OOP.ComandOOP;
 import me.sean0402.projectlinks.ProjectLinks;
 import me.sean0402.projectlinks.utils.Utils;
 import org.bukkit.Bukkit;
@@ -26,7 +26,7 @@ public class CommandListener implements Listener {
     @EventHandler
     public void onCommandSend(PlayerCommandPreprocessEvent e) {
         String message = e.getMessage().replace("/", "");
-        for (Command command : ProjectLinks.commandList) {
+        for (ComandOOP command : ProjectLinks.commandList) {
             if (message.equalsIgnoreCase(command.getCommandName())) {
                 e.setCancelled(true);
                 if (!manager.tryCooldown(e.getPlayer().getUniqueId(), command.getCooldown())) {
@@ -40,7 +40,7 @@ public class CommandListener implements Listener {
         }
     }
 
-    private void runActions(Player player, Command command) {
+    private void runActions(Player player, ComandOOP command) {
         for (String prefix : command.getActions()) {
             String action = prefix.substring(prefix.indexOf("]") + 1).replace("%player%", player.getName()).replace("%Player%", player.getName()).trim();
             if (prefix.startsWith("[sendMessage]")) {

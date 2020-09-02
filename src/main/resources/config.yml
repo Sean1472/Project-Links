@@ -21,3 +21,4 @@ Commands:
 Messages:
   onCooldown: "&c&l(!) &fYou are on cooldown for another &c%remaining% seconds&f."
   takenMoney: "&6&l(!) &6%price% &fhas been taken from your balance for running this command!"
+  reloadConfig: "&6&l(!) &fConfig reloaded &asuccessfully!"
