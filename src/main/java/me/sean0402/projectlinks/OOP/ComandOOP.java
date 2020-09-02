@@ -1,7 +1,6 @@
 package me.sean0402.projectlinks.OOP;
 
 import me.sean0402.projectlinks.utils.Utils;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -45,7 +44,9 @@ public class ComandOOP {
     public ItemStack getCommandItem() {
         ItemStack item = new ItemBuilder(Material.BOOK)
                 .setName("&aCommand &f(&a" + getCommandName() + "&f)")
-                .setLore(getLoreLines().split("\\n"), "", "")
+                .setLore(getLoreLines().split("\\n"))
+                .addLoreLine("&7&nActions:", 0)
+                .addLoreLine("&7&nInformation", "&fCooldown: &a" + getCooldown(), "&fCost: &a" + getCost())
                 .build();
         return item.clone();
     }
@@ -55,7 +56,6 @@ public class ComandOOP {
         for (String s : getActions()) {
             result.append(Utils.colour("&7- &a")).append(s).append("\n");
         }
-        Bukkit.broadcastMessage("string " + result.toString());
         return result.toString();
     }
 }

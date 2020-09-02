@@ -6,7 +6,9 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /*
  Created on 02/09/2020 at 02:15
@@ -42,6 +44,28 @@ public class ItemBuilder {
 
     public ItemBuilder setLore(String... lore) {
         itemMeta.setLore(Utils.colorMessage(Arrays.asList(lore)));
+        return this;
+    }
+
+    public ItemBuilder addLoreLine(String line) {
+        List<String> lore = new ArrayList<>();
+        if (itemMeta.hasLore()) lore = new ArrayList<>(itemMeta.getLore());
+        lore.add(line);
+        itemMeta.setLore(Utils.colorMessage(lore));
+        return this;
+    }
+
+    public ItemBuilder addLoreLine(String... lines) {
+        for (String line : lines) {
+            addLoreLine(Utils.colour(line));
+        }
+        return this;
+    }
+
+    public ItemBuilder addLoreLine(String line, int index) {
+        List<String> lore = new ArrayList<>(itemMeta.getLore());
+        lore.set(index, line);
+        itemMeta.setLore(Utils.colorMessage(lore));
         return this;
     }
 
