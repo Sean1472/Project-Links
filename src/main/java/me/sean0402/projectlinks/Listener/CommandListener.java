@@ -34,8 +34,10 @@ public class CommandListener implements Listener {
                     return;
                 }
                 runActions(e.getPlayer(), command);
-                ProjectLinks.getInstance().getVault().getEcon().withdrawPlayer(e.getPlayer(), command.getCost());
-                e.getPlayer().sendMessage(Utils.colour(ProjectLinks.getInstance().getConfig().getString("Messages.takenMoney").replace("%price%", String.valueOf(command.getCost()))));
+                if (ProjectLinks.getInstance().getVault().getEcon() != null) {
+                    ProjectLinks.getInstance().getVault().getEcon().withdrawPlayer(e.getPlayer(), command.getCost());
+                    e.getPlayer().sendMessage(Utils.colour(ProjectLinks.getInstance().getConfig().getString("Messages.takenMoney").replace("%price%", String.valueOf(command.getCost()))));
+                }
             }
         }
     }

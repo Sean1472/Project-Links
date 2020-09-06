@@ -26,7 +26,7 @@ public class LinksCommand extends Command {
         } else if (args[0].equalsIgnoreCase("reload") && (p.hasPermission("projectlinks.reload"))) {
             ProjectLinks.getInstance().reloadConfig();
             p.sendMessage(Utils.colour(ProjectLinks.getInstance().getConfig().getString("Messages.reloadConfig")));
-        } else if (args[0].equalsIgnoreCase("menu")) {
+        } else if (args[0].equalsIgnoreCase("menu") && (p.hasPermission("projectlinks.menu"))) {
             new MainMenu(ProjectLinks.getPlayerMenu(p)).open();
         }
     }
